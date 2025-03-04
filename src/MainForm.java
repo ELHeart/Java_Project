@@ -3,8 +3,11 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MainForm extends JFrame {
+    private static final Logger logger = LoggerFactory.getLogger(MainForm.class);
     private final JTable tblStudents;
     private final DefaultTableModel tableModel;
     private final JTextField txtSearch;
@@ -119,10 +122,10 @@ public class MainForm extends JFrame {
                     tableModel.addRow(row);
                 }
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error loading students: " + ex.getMessage(),
-                    "Database Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
+        } catch (SQLException ex) {
+            logger.error("Database error during member list refresh", ex);
+            JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -156,10 +159,10 @@ public class MainForm extends JFrame {
                     }
                 }
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error searching students: " + ex.getMessage(),
-                    "Database Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
+        } catch (SQLException ex) {
+            logger.error("Database error during member search", ex);
+            JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -201,10 +204,10 @@ public class MainForm extends JFrame {
                                 "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Error deleting student: " + ex.getMessage(),
-                        "Database Error", JOptionPane.ERROR_MESSAGE);
-                ex.printStackTrace();
+            } catch (SQLException ex) {
+                logger.error("Database error during member deletion", ex);
+                JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

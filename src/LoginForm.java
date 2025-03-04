@@ -1,8 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LoginForm extends JFrame {
+    private static final Logger logger = LoggerFactory.getLogger(LoginForm.class);
     private final JTextField txtUsername;
     private final JPasswordField txtPassword;
 
@@ -84,9 +87,10 @@ public class LoginForm extends JFrame {
                     }
                 }
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
+        } catch (SQLException ex) {
+            logger.error("Database error during login", ex);
+            JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
