@@ -91,6 +91,10 @@ public class LoginForm extends JFrame {
             logger.error("Database error during login", ex);
             JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            logger.error("Unexpected error during login", ex);
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
