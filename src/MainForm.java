@@ -261,7 +261,7 @@ public class MainForm extends JFrame {
         panel.add(yearLabel, gbc);
 
         JButton closeButton = new JButton("Close");
-        closeButton.addActionListener(_ -> aboutWindow.dispose());
+        closeButton.addActionListener(e -> aboutWindow.dispose());
         panel.add(closeButton, gbc);
 
         aboutWindow.setContentPane(panel);
@@ -270,7 +270,7 @@ public class MainForm extends JFrame {
         aboutWindow.setVisible(true);
 
         // Auto-close after 10 seconds
-        Timer timer = new Timer(10000, _ -> aboutWindow.dispose());
+        Timer timer = new Timer(10000, e -> aboutWindow.dispose());
         timer.setRepeats(false);
         timer.start();
     }

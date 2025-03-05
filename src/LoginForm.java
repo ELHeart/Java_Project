@@ -108,10 +108,4 @@ public class LoginForm extends JFrame {
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-    private void openRegisterForm() {
-        RegisterForm registerForm = new RegisterForm();
-        registerForm.setVisible(true);
-        dispose();
-    }
 }
