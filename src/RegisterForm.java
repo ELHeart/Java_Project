@@ -25,9 +25,9 @@ public class RegisterForm extends JFrame {
         // Set frame icon
         ImageUtils.setFrameIcon(this);
 
-        // Create main panel with blurred background
-        JPanel mainPanel = ImageUtils.createBlurredBackgroundPanel();
-        mainPanel.setLayout(new BorderLayout());
+        // Create main panel
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(Color.WHITE);
 
         // Add logo at the top
         JLabel logoLabel = new JLabel(ImageUtils.getLogo(100, 100));
@@ -36,7 +36,7 @@ public class RegisterForm extends JFrame {
 
         // Create registration panel
         JPanel registerPanel = new JPanel(new GridBagLayout());
-        registerPanel.setOpaque(false);
+        registerPanel.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
 
@@ -47,14 +47,6 @@ public class RegisterForm extends JFrame {
         JLabel lblFullname = new JLabel("Full Name:");
         JLabel lblEmail = new JLabel("Email:");
         JLabel lblPhone = new JLabel("Phone:");
-
-        // Set text color for better visibility
-        lblUsername.setForeground(Color.BLACK);
-        lblPassword.setForeground(Color.BLACK);
-        lblConfirmPassword.setForeground(Color.BLACK);
-        lblFullname.setForeground(Color.BLACK);
-        lblEmail.setForeground(Color.BLACK);
-        lblPhone.setForeground(Color.BLACK);
 
         txtUsername = new JTextField(20);
         txtPassword = new JPasswordField(20);
@@ -98,7 +90,7 @@ public class RegisterForm extends JFrame {
 
         // Button panel
         JPanel buttonPanel = new JPanel(new FlowLayout());
-        buttonPanel.setOpaque(false);
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.add(btnRegister);
         buttonPanel.add(btnBack);
 

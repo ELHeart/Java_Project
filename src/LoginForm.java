@@ -18,9 +18,9 @@ public class LoginForm extends JFrame {
         // Set frame icon
         ImageUtils.setFrameIcon(this);
 
-        // Create main panel with blurred background
-        JPanel mainPanel = ImageUtils.createBlurredBackgroundPanel();
-        mainPanel.setLayout(new BorderLayout());
+        // Create main panel
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(Color.WHITE);
         
         // Add logo at the top
         JLabel logoLabel = new JLabel(ImageUtils.getLogo(100, 100));
@@ -29,15 +29,13 @@ public class LoginForm extends JFrame {
 
         // Create login panel
         JPanel loginPanel = new JPanel(new GridBagLayout());
-        loginPanel.setOpaque(false);
+        loginPanel.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
 
         // Add components
         JLabel lblUsername = new JLabel("Username:");
-        lblUsername.setForeground(Color.BLACK);
         JLabel lblPassword = new JLabel("Password:");
-        lblPassword.setForeground(Color.BLACK);
         txtUsername = new JTextField(20);
         txtPassword = new JPasswordField(20);
         JButton btnLogin = new JButton("Login");
@@ -54,7 +52,7 @@ public class LoginForm extends JFrame {
         loginPanel.add(txtPassword, gbc);
         
         JPanel buttonPanel = new JPanel(new FlowLayout());
-        buttonPanel.setOpaque(false);
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.add(btnLogin);
         buttonPanel.add(btnRegister);
         

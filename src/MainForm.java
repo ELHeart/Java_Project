@@ -24,13 +24,13 @@ public class MainForm extends JFrame {
         // Set frame icon
         ImageUtils.setFrameIcon(this);
 
-        // Create main panel with blurred background
-        JPanel mainPanel = ImageUtils.createBlurredBackgroundPanel();
-        mainPanel.setLayout(new BorderLayout());
+        // Create main panel
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(Color.WHITE);
 
         // Create header panel with logo
         JPanel headerPanel = new JPanel(new BorderLayout());
-        headerPanel.setOpaque(false);
+        headerPanel.setBackground(Color.WHITE);
         
         // Add logo to the right side of header
         JLabel logoLabel = new JLabel(ImageUtils.getLogo(80, 80));
@@ -38,7 +38,7 @@ public class MainForm extends JFrame {
         
         // Add search panel to the left side of header
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        searchPanel.setOpaque(false);
+        searchPanel.setBackground(Color.WHITE);
         txtSearch = new JTextField(20);
         JButton btnSearch = new JButton("Search");
         searchPanel.add(new JLabel("Search: "));
@@ -62,7 +62,7 @@ public class MainForm extends JFrame {
 
         // Button panel
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setOpaque(false);
+        buttonPanel.setBackground(Color.WHITE);
         JButton btnRefresh = new JButton("Refresh");
         JButton btnDelete = new JButton("Delete");
         JButton btnLogout = new JButton("Logout");
