@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Registration form for the Drama Club Membership Application.
+ * Handles new user registration with validation and duplicate checking.
+ */
 public class RegisterForm extends JFrame {
     private static final Logger logger = LoggerFactory.getLogger(RegisterForm.class);
     private final JTextField txtUsername;
@@ -16,6 +20,10 @@ public class RegisterForm extends JFrame {
     private final JTextField txtEmail;
     private final JTextField txtPhone;
 
+    /**
+     * Constructs the registration form with all required input fields.
+     * Initializes the UI components and sets up event handlers.
+     */
     public RegisterForm() {
         setTitle("Drama Club Membership - Register");
         setSize(500, 400);
@@ -102,14 +110,19 @@ public class RegisterForm extends JFrame {
         add(mainPanel);
 
         // Add action listeners
-        btnRegister.addActionListener(e -> register());
-        btnBack.addActionListener(e -> {
+        btnRegister.addActionListener(__ -> register());
+        btnBack.addActionListener(__ -> {
             LoginForm loginForm = new LoginForm();
             loginForm.setVisible(true);
             dispose();
         });
     }
 
+    /**
+     * Handles the registration process with input validation and database operations.
+     * Validates required fields, password matching, and checks for duplicate usernames/fullnames.
+     * If successful, creates a new user account and returns to login screen.
+     */
     private void register() {
         String username = txtUsername.getText();
         String password = new String(txtPassword.getPassword());

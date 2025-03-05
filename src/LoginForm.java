@@ -4,11 +4,19 @@ import java.sql.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Login form for the Drama Club Membership Application.
+ * Handles user authentication and navigation to the main application.
+ */
 public class LoginForm extends JFrame {
     private static final Logger logger = LoggerFactory.getLogger(LoginForm.class);
     private final JTextField txtUsername;
     private final JPasswordField txtPassword;
 
+    /**
+     * Constructs the login form with username and password fields.
+     * Initializes the UI components and sets up event handlers.
+     */
     public LoginForm() {
         setTitle("Drama Club Membership - Login");
         setSize(400, 300);
@@ -64,14 +72,18 @@ public class LoginForm extends JFrame {
         add(mainPanel);
 
         // Add action listeners
-        btnLogin.addActionListener(e -> login());
-        btnRegister.addActionListener(e -> {
+        btnLogin.addActionListener(__ -> login());
+        btnRegister.addActionListener(__ -> {
             RegisterForm registerForm = new RegisterForm();
             registerForm.setVisible(true);
             dispose();
         });
     }
 
+    /**
+     * Handles the login process by validating credentials against the database.
+     * If successful, opens the main form; otherwise, shows an error message.
+     */
     private void login() {
         String username = txtUsername.getText();
         String password = new String(txtPassword.getPassword());

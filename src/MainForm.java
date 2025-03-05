@@ -6,6 +6,10 @@ import java.sql.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Main form of the Drama Club Membership Application.
+ * Displays and manages student records with search and delete functionality.
+ */
 public class MainForm extends JFrame {
     private static final Logger logger = LoggerFactory.getLogger(MainForm.class);
     private final JTable tblStudents;
@@ -13,6 +17,10 @@ public class MainForm extends JFrame {
     private final JTextField txtSearch;
     private final int currentUserId;
 
+    /**
+     * Constructs the main form with student management functionality.
+     * @param userId The ID of the currently logged-in user
+     */
     public MainForm(int userId) {
         this.currentUserId = userId;
 
@@ -95,28 +103,32 @@ public class MainForm extends JFrame {
         add(mainPanel);
 
         // Add action listeners
-        btnRefresh.addActionListener(e -> loadStudents());
-        btnDelete.addActionListener(e -> deleteStudent());
-        btnLogout.addActionListener(e -> {
+        btnRefresh.addActionListener(__ -> loadStudents());
+        btnDelete.addActionListener(__ -> deleteStudent());
+        btnLogout.addActionListener(__ -> {
             LoginForm loginForm = new LoginForm();
             loginForm.setVisible(true);
             dispose();
         });
-        btnSearch.addActionListener(e -> searchStudent());
+        btnSearch.addActionListener(__ -> searchStudent());
 
         // Add menu item action listeners
-        refreshItem.addActionListener(e -> loadStudents());
-        logoutItem.addActionListener(e -> {
+        refreshItem.addActionListener(__ -> loadStudents());
+        logoutItem.addActionListener(__ -> {
             LoginForm loginForm = new LoginForm();
             loginForm.setVisible(true);
             dispose();
         });
-        aboutItem.addActionListener(e -> showAboutWindow());
+        aboutItem.addActionListener(__ -> showAboutWindow());
 
         // Initial table load
         loadStudents();
     }
 
+    /**
+     * Loads all students from the database and displays them in the table.
+     * Orders the results by fullname.
+     */
     private void loadStudents() {
         tableModel.setRowCount(0);
 
@@ -143,6 +155,10 @@ public class MainForm extends JFrame {
         }
     }
 
+    /**
+     * Searches for students by username or full name.
+     * If search term is empty, loads all students.
+     */
     private void searchStudent() {
         String searchTerm = txtSearch.getText().trim();
 
@@ -180,6 +196,10 @@ public class MainForm extends JFrame {
         }
     }
 
+    /**
+     * Deletes the selected student after confirmation.
+     * Prevents users from deleting their own account.
+     */
     private void deleteStudent() {
         int selectedRow = tblStudents.getSelectedRow();
 
@@ -226,6 +246,10 @@ public class MainForm extends JFrame {
         }
     }
 
+    /**
+     * Displays the about window with application information.
+     * Window auto-closes after 10 seconds.
+     */
     private void showAboutWindow() {
         JWindow aboutWindow = new JWindow(this);
         JPanel panel = new JPanel(new GridBagLayout());
@@ -261,7 +285,7 @@ public class MainForm extends JFrame {
         panel.add(yearLabel, gbc);
 
         JButton closeButton = new JButton("Close");
-        closeButton.addActionListener(e -> aboutWindow.dispose());
+        closeButton.addActionListener(__ -> aboutWindow.dispose());
         panel.add(closeButton, gbc);
 
         aboutWindow.setContentPane(panel);
@@ -270,7 +294,7 @@ public class MainForm extends JFrame {
         aboutWindow.setVisible(true);
 
         // Auto-close after 10 seconds
-        Timer timer = new Timer(10000, e -> aboutWindow.dispose());
+        Timer timer = new Timer(10000, __ -> aboutWindow.dispose());
         timer.setRepeats(false);
         timer.start();
     }
