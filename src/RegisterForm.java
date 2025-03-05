@@ -18,9 +18,27 @@ public class RegisterForm extends JFrame {
 
     public RegisterForm() {
         setTitle("Drama Club Membership - Register");
-        setSize(500, 300);
+        setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        // Set frame icon
+        ImageUtils.setFrameIcon(this);
+
+        // Create main panel with blurred background
+        JPanel mainPanel = ImageUtils.createBlurredBackgroundPanel();
+        mainPanel.setLayout(new BorderLayout());
+
+        // Add logo at the top
+        JLabel logoLabel = new JLabel(ImageUtils.getLogo(100, 100));
+        logoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        mainPanel.add(logoLabel, BorderLayout.NORTH);
+
+        // Create registration panel
+        JPanel registerPanel = new JPanel(new GridBagLayout());
+        registerPanel.setOpaque(false);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
 
         // Create components
         JLabel lblUsername = new JLabel("Username:");
@@ -30,81 +48,74 @@ public class RegisterForm extends JFrame {
         JLabel lblEmail = new JLabel("Email:");
         JLabel lblPhone = new JLabel("Phone:");
 
+        // Set text color for better visibility
+        lblUsername.setForeground(Color.BLACK);
+        lblPassword.setForeground(Color.BLACK);
+        lblConfirmPassword.setForeground(Color.BLACK);
+        lblFullname.setForeground(Color.BLACK);
+        lblEmail.setForeground(Color.BLACK);
+        lblPhone.setForeground(Color.BLACK);
+
         txtUsername = new JTextField(20);
         txtPassword = new JPasswordField(20);
         txtConfirmPassword = new JPasswordField(20);
         txtFullname = new JTextField(20);
         txtEmail = new JTextField(20);
         txtPhone = new JTextField(20);
-
         JButton btnRegister = new JButton("Register");
-        JButton btnCancel = new JButton("Cancel");
+        JButton btnBack = new JButton("Back to Login");
 
-        // Create panel and set layout
-        JPanel panel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.anchor = GridBagConstraints.WEST;
-
-        // Add components to panel
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        panel.add(lblUsername, gbc);
-
+        // Layout components
+        gbc.gridx = 0; gbc.gridy = 0;
+        registerPanel.add(lblUsername, gbc);
         gbc.gridx = 1;
-        panel.add(txtUsername, gbc);
+        registerPanel.add(txtUsername, gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        panel.add(lblPassword, gbc);
-
+        gbc.gridx = 0; gbc.gridy = 1;
+        registerPanel.add(lblPassword, gbc);
         gbc.gridx = 1;
-        panel.add(txtPassword, gbc);
+        registerPanel.add(txtPassword, gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        panel.add(lblConfirmPassword, gbc);
-
+        gbc.gridx = 0; gbc.gridy = 2;
+        registerPanel.add(lblConfirmPassword, gbc);
         gbc.gridx = 1;
-        panel.add(txtConfirmPassword, gbc);
+        registerPanel.add(txtConfirmPassword, gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        panel.add(lblFullname, gbc);
-
+        gbc.gridx = 0; gbc.gridy = 3;
+        registerPanel.add(lblFullname, gbc);
         gbc.gridx = 1;
-        panel.add(txtFullname, gbc);
+        registerPanel.add(txtFullname, gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        panel.add(lblEmail, gbc);
-
+        gbc.gridx = 0; gbc.gridy = 4;
+        registerPanel.add(lblEmail, gbc);
         gbc.gridx = 1;
-        panel.add(txtEmail, gbc);
+        registerPanel.add(txtEmail, gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        panel.add(lblPhone, gbc);
-
+        gbc.gridx = 0; gbc.gridy = 5;
+        registerPanel.add(lblPhone, gbc);
         gbc.gridx = 1;
-        panel.add(txtPhone, gbc);
+        registerPanel.add(txtPhone, gbc);
 
-        // Create button panel
-        JPanel buttonPanel = new JPanel();
+        // Button panel
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        buttonPanel.setOpaque(false);
         buttonPanel.add(btnRegister);
-        buttonPanel.add(btnCancel);
+        buttonPanel.add(btnBack);
 
-        gbc.gridx = 0;
-        gbc.gridy = 6;
+        gbc.gridx = 0; gbc.gridy = 6;
         gbc.gridwidth = 2;
-        panel.add(buttonPanel, gbc);
+        registerPanel.add(buttonPanel, gbc);
 
-        // Add panel to frame
-        add(panel);
+        mainPanel.add(registerPanel, BorderLayout.CENTER);
+        add(mainPanel);
 
         // Add action listeners
-        btnRegister.addActionListener(_ -> register());
-        btnCancel.addActionListener(_ -> cancel());
+        btnRegister.addActionListener(e -> register());
+        btnBack.addActionListener(e -> {
+            LoginForm loginForm = new LoginForm();
+            loginForm.setVisible(true);
+            dispose();
+        });
     }
 
     private void register() {
@@ -176,11 +187,5 @@ public class RegisterForm extends JFrame {
             JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    private void cancel() {
-        LoginForm loginForm = new LoginForm();
-        loginForm.setVisible(true);
-        dispose();
     }
 }

@@ -11,54 +11,67 @@ public class LoginForm extends JFrame {
 
     public LoginForm() {
         setTitle("Drama Club Membership - Login");
-        setSize(400, 200);
+        setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        
+        // Set frame icon
+        ImageUtils.setFrameIcon(this);
 
-        // Create components
+        // Create main panel with blurred background
+        JPanel mainPanel = ImageUtils.createBlurredBackgroundPanel();
+        mainPanel.setLayout(new BorderLayout());
+        
+        // Add logo at the top
+        JLabel logoLabel = new JLabel(ImageUtils.getLogo(100, 100));
+        logoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        mainPanel.add(logoLabel, BorderLayout.NORTH);
+
+        // Create login panel
+        JPanel loginPanel = new JPanel(new GridBagLayout());
+        loginPanel.setOpaque(false);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+
+        // Add components
         JLabel lblUsername = new JLabel("Username:");
+        lblUsername.setForeground(Color.BLACK);
         JLabel lblPassword = new JLabel("Password:");
+        lblPassword.setForeground(Color.BLACK);
         txtUsername = new JTextField(20);
         txtPassword = new JPasswordField(20);
         JButton btnLogin = new JButton("Login");
         JButton btnRegister = new JButton("Register");
 
-        // Create panel and set layout
-        JPanel panel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
-
-        // Add components to panel
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        panel.add(lblUsername, gbc);
-
+        // Layout components
+        gbc.gridx = 0; gbc.gridy = 0;
+        loginPanel.add(lblUsername, gbc);
         gbc.gridx = 1;
-        panel.add(txtUsername, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        panel.add(lblPassword, gbc);
-
+        loginPanel.add(txtUsername, gbc);
+        gbc.gridx = 0; gbc.gridy = 1;
+        loginPanel.add(lblPassword, gbc);
         gbc.gridx = 1;
-        panel.add(txtPassword, gbc);
-
-        // Create button panel
-        JPanel buttonPanel = new JPanel();
+        loginPanel.add(txtPassword, gbc);
+        
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        buttonPanel.setOpaque(false);
         buttonPanel.add(btnLogin);
         buttonPanel.add(btnRegister);
-
-        gbc.gridx = 0;
-        gbc.gridy = 2;
+        
+        gbc.gridx = 0; gbc.gridy = 2;
         gbc.gridwidth = 2;
-        panel.add(buttonPanel, gbc);
+        loginPanel.add(buttonPanel, gbc);
 
-        // Add panel to frame
-        add(panel);
+        mainPanel.add(loginPanel, BorderLayout.CENTER);
+        add(mainPanel);
 
         // Add action listeners
-        btnLogin.addActionListener(_ -> login());
-        btnRegister.addActionListener(_ -> openRegisterForm());
+        btnLogin.addActionListener(e -> login());
+        btnRegister.addActionListener(e -> {
+            RegisterForm registerForm = new RegisterForm();
+            registerForm.setVisible(true);
+            dispose();
+        });
     }
 
     private void login() {

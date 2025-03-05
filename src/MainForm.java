@@ -21,86 +21,71 @@ public class MainForm extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Create menu bar
-        JMenuBar menuBar = new JMenuBar();
+        // Set frame icon
+        ImageUtils.setFrameIcon(this);
 
-        // File menu
-        JMenu fileMenu = new JMenu("File");
-        fileMenu.setMnemonic(KeyEvent.VK_F);
+        // Create main panel with blurred background
+        JPanel mainPanel = ImageUtils.createBlurredBackgroundPanel();
+        mainPanel.setLayout(new BorderLayout());
 
-        JMenuItem openMenuItem = new JMenuItem("Open");
-        openMenuItem.setMnemonic(KeyEvent.VK_O);
-        openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
-        openMenuItem.addActionListener(_ -> loadStudents());
+        // Create header panel with logo
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setOpaque(false);
+        
+        // Add logo to the right side of header
+        JLabel logoLabel = new JLabel(ImageUtils.getLogo(80, 80));
+        headerPanel.add(logoLabel, BorderLayout.EAST);
+        
+        // Add search panel to the left side of header
+        JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        searchPanel.setOpaque(false);
+        txtSearch = new JTextField(20);
+        JButton btnSearch = new JButton("Search");
+        searchPanel.add(new JLabel("Search: "));
+        searchPanel.add(txtSearch);
+        searchPanel.add(btnSearch);
+        headerPanel.add(searchPanel, BorderLayout.WEST);
 
-        JMenuItem exitMenuItem = new JMenuItem("Exit");
-        exitMenuItem.setMnemonic(KeyEvent.VK_X);
-        exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK));
-        exitMenuItem.addActionListener(_ -> System.exit(0));
+        mainPanel.add(headerPanel, BorderLayout.NORTH);
 
-        fileMenu.add(openMenuItem);
-        fileMenu.addSeparator();
-        fileMenu.add(exitMenuItem);
-
-        // Help menu
-        JMenu helpMenu = new JMenu("Help");
-        helpMenu.setMnemonic(KeyEvent.VK_H);
-
-        JMenuItem aboutMenuItem = new JMenuItem("About");
-        aboutMenuItem.setMnemonic(KeyEvent.VK_A);
-        aboutMenuItem.addActionListener(_ -> showAboutWindow());
-
-        helpMenu.add(aboutMenuItem);
-
-        // Add menus to menu bar
-        menuBar.add(fileMenu);
-        menuBar.add(helpMenu);
-
-        // Set menu bar
-        setJMenuBar(menuBar);
-
-        // Create table model
-        tableModel = new DefaultTableModel(
-                new String[] {"ID", "Username", "Full Name", "Email", "Phone", "Date Registered"},
-                0
-        ) {
+        // Table setup
+        String[] columnNames = {"ID", "Username", "Full Name", "Email", "Phone", "Date Registered"};
+        tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-
-        // Create table
         tblStudents = new JTable(tableModel);
-        tblStudents.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scrollPane = new JScrollPane(tblStudents);
-
-        // Create search panel
-        JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        txtSearch = new JTextField(20);
-        JButton btnSearch = new JButton("Search");
-        btnSearch.addActionListener(_ -> searchStudent());
-        searchPanel.add(new JLabel("Search:"));
-        searchPanel.add(txtSearch);
-        searchPanel.add(btnSearch);
-
-        // Create button panel
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton btnDelete = new JButton("Delete");
-        btnDelete.addActionListener(_ -> deleteStudent());
-        buttonPanel.add(btnDelete);
-
-        // Create main panel
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(searchPanel, BorderLayout.NORTH);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
+
+        // Button panel
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false);
+        JButton btnRefresh = new JButton("Refresh");
+        JButton btnDelete = new JButton("Delete");
+        JButton btnLogout = new JButton("Logout");
+        buttonPanel.add(btnRefresh);
+        buttonPanel.add(btnDelete);
+        buttonPanel.add(btnLogout);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-        // Add main panel to frame
+        // Add the main panel to the frame
         add(mainPanel);
 
-        // Load students
-        loadStudents();
+        // Add action listeners
+        btnRefresh.addActionListener(e -> refreshTable());
+        btnDelete.addActionListener(e -> deleteSelectedStudent());
+        btnLogout.addActionListener(e -> {
+            LoginForm loginForm = new LoginForm();
+            loginForm.setVisible(true);
+            dispose();
+        });
+        btnSearch.addActionListener(e -> searchStudents(txtSearch.getText()));
+
+        // Initial table load
+        refreshTable();
     }
 
     private void loadStudents() {
