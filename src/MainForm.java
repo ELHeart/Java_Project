@@ -24,6 +24,26 @@ public class MainForm extends JFrame {
         // Set frame icon
         ImageUtils.setFrameIcon(this);
 
+        // Create menu bar
+        JMenuBar menuBar = new JMenuBar();
+        
+        // File menu
+        JMenu fileMenu = new JMenu("File");
+        JMenuItem refreshItem = new JMenuItem("Refresh");
+        JMenuItem logoutItem = new JMenuItem("Logout");
+        fileMenu.add(refreshItem);
+        fileMenu.addSeparator();
+        fileMenu.add(logoutItem);
+        
+        // Help menu
+        JMenu helpMenu = new JMenu("Help");
+        JMenuItem aboutItem = new JMenuItem("About");
+        helpMenu.add(aboutItem);
+        
+        menuBar.add(fileMenu);
+        menuBar.add(helpMenu);
+        setJMenuBar(menuBar);
+
         // Create main panel
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(Color.WHITE);
@@ -83,6 +103,15 @@ public class MainForm extends JFrame {
             dispose();
         });
         btnSearch.addActionListener(e -> searchStudent());
+
+        // Add menu item action listeners
+        refreshItem.addActionListener(e -> loadStudents());
+        logoutItem.addActionListener(e -> {
+            LoginForm loginForm = new LoginForm();
+            loginForm.setVisible(true);
+            dispose();
+        });
+        aboutItem.addActionListener(e -> showAboutWindow());
 
         // Initial table load
         loadStudents();
