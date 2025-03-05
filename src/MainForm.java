@@ -1,10 +1,10 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.*;
 import java.sql.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Main form of the Drama Club Membership Application.
@@ -103,23 +103,23 @@ public class MainForm extends JFrame {
         add(mainPanel);
 
         // Add action listeners
-        btnRefresh.addActionListener(__ -> loadStudents());
-        btnDelete.addActionListener(__ -> deleteStudent());
-        btnLogout.addActionListener(__ -> {
+        btnRefresh.addActionListener(_ -> loadStudents());
+        btnDelete.addActionListener(_ -> deleteStudent());
+        btnLogout.addActionListener(_ -> {
             LoginForm loginForm = new LoginForm();
             loginForm.setVisible(true);
             dispose();
         });
-        btnSearch.addActionListener(__ -> searchStudent());
+        btnSearch.addActionListener(_ -> searchStudent());
 
         // Add menu item action listeners
-        refreshItem.addActionListener(__ -> loadStudents());
-        logoutItem.addActionListener(__ -> {
+        refreshItem.addActionListener(_ -> loadStudents());
+        logoutItem.addActionListener(_ -> {
             LoginForm loginForm = new LoginForm();
             loginForm.setVisible(true);
             dispose();
         });
-        aboutItem.addActionListener(__ -> showAboutWindow());
+        aboutItem.addActionListener(_ -> showAboutWindow());
 
         // Initial table load
         loadStudents();
@@ -285,7 +285,7 @@ public class MainForm extends JFrame {
         panel.add(yearLabel, gbc);
 
         JButton closeButton = new JButton("Close");
-        closeButton.addActionListener(__ -> aboutWindow.dispose());
+        closeButton.addActionListener(_ -> aboutWindow.dispose());
         panel.add(closeButton, gbc);
 
         aboutWindow.setContentPane(panel);
@@ -294,7 +294,7 @@ public class MainForm extends JFrame {
         aboutWindow.setVisible(true);
 
         // Auto-close after 10 seconds
-        Timer timer = new Timer(10000, __ -> aboutWindow.dispose());
+        Timer timer = new Timer(10000, _ -> aboutWindow.dispose());
         timer.setRepeats(false);
         timer.start();
     }

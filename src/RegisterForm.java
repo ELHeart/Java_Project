@@ -1,11 +1,12 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.swing.*;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Registration form for the Drama Club Membership Application.
@@ -110,8 +111,8 @@ public class RegisterForm extends JFrame {
         add(mainPanel);
 
         // Add action listeners
-        btnRegister.addActionListener(__ -> register());
-        btnBack.addActionListener(__ -> {
+        btnRegister.addActionListener(_ -> register());
+        btnBack.addActionListener(_ -> {
             LoginForm loginForm = new LoginForm();
             loginForm.setVisible(true);
             dispose();
