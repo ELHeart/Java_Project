@@ -75,17 +75,17 @@ public class MainForm extends JFrame {
         add(mainPanel);
 
         // Add action listeners
-        btnRefresh.addActionListener(e -> refreshTable());
-        btnDelete.addActionListener(e -> deleteSelectedStudent());
+        btnRefresh.addActionListener(e -> loadStudents());
+        btnDelete.addActionListener(e -> deleteStudent());
         btnLogout.addActionListener(e -> {
             LoginForm loginForm = new LoginForm();
             loginForm.setVisible(true);
             dispose();
         });
-        btnSearch.addActionListener(e -> searchStudents(txtSearch.getText()));
+        btnSearch.addActionListener(e -> searchStudent());
 
         // Initial table load
-        refreshTable();
+        loadStudents();
     }
 
     private void loadStudents() {
