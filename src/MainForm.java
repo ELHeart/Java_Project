@@ -17,7 +17,7 @@ public class MainForm extends JFrame {
         this.currentUserId = userId;
 
         setTitle("Drama Club Membership - Main");
-        setSize(900, 600);
+        setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -25,39 +25,23 @@ public class MainForm extends JFrame {
         ImageUtils.setFrameIcon(this);
 
         // Create main panel
-        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
-        mainPanel.setBackground(new Color(240, 240, 250));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(Color.WHITE);
 
         // Create header panel with logo
-        JPanel headerPanel = new JPanel(new BorderLayout(15, 0));
-        headerPanel.setBackground(new Color(240, 240, 250));
-        headerPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setBackground(Color.WHITE);
         
         // Add logo to the right side of header
         JLabel logoLabel = new JLabel(ImageUtils.getLogo(80, 80));
         headerPanel.add(logoLabel, BorderLayout.EAST);
         
         // Add search panel to the left side of header
-        JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
-        searchPanel.setBackground(new Color(240, 240, 250));
-        
-        JLabel searchLabel = new JLabel("Search:");
-        searchLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        searchPanel.setBackground(Color.WHITE);
         txtSearch = new JTextField(20);
-        txtSearch.setPreferredSize(new Dimension(200, 30));
-        txtSearch.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(180, 180, 180)),
-            BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        
         JButton btnSearch = new JButton("Search");
-        btnSearch.setPreferredSize(new Dimension(100, 30));
-        btnSearch.setBackground(new Color(70, 130, 180));
-        btnSearch.setForeground(Color.WHITE);
-        btnSearch.setFont(new Font("Segoe UI", Font.BOLD, 12));
-        btnSearch.setFocusPainted(false);
-        
-        searchPanel.add(searchLabel);
+        searchPanel.add(new JLabel("Search: "));
         searchPanel.add(txtSearch);
         searchPanel.add(btnSearch);
         headerPanel.add(searchPanel, BorderLayout.WEST);
@@ -73,29 +57,15 @@ public class MainForm extends JFrame {
             }
         };
         tblStudents = new JTable(tableModel);
-        tblStudents.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        tblStudents.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
-        tblStudents.setRowHeight(25);
-        tblStudents.setSelectionBackground(new Color(230, 230, 250));
-        
         JScrollPane scrollPane = new JScrollPane(tblStudents);
-        scrollPane.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
         // Button panel
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        buttonPanel.setBackground(new Color(240, 240, 250));
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
-        
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.WHITE);
         JButton btnRefresh = new JButton("Refresh");
-        styleButton(btnRefresh, new Color(70, 130, 180));
-        
         JButton btnDelete = new JButton("Delete");
-        styleButton(btnDelete, new Color(220, 53, 69));
-        
         JButton btnLogout = new JButton("Logout");
-        styleButton(btnLogout, new Color(108, 117, 125));
-        
         buttonPanel.add(btnRefresh);
         buttonPanel.add(btnDelete);
         buttonPanel.add(btnLogout);
@@ -116,14 +86,6 @@ public class MainForm extends JFrame {
 
         // Initial table load
         loadStudents();
-    }
-
-    private void styleButton(JButton button, Color bgColor) {
-        button.setPreferredSize(new Dimension(100, 35));
-        button.setBackground(bgColor);
-        button.setForeground(Color.WHITE);
-        button.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        button.setFocusPainted(false);
     }
 
     private void loadStudents() {

@@ -18,7 +18,7 @@ public class RegisterForm extends JFrame {
 
     public RegisterForm() {
         setTitle("Drama Club Membership - Register");
-        setSize(500, 500);
+        setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -26,23 +26,21 @@ public class RegisterForm extends JFrame {
         ImageUtils.setFrameIcon(this);
 
         // Create main panel
-        JPanel mainPanel = new JPanel(new BorderLayout(0, 20));
-        mainPanel.setBackground(new Color(240, 240, 250));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(Color.WHITE);
 
         // Add logo at the top
-        JLabel logoLabel = new JLabel(ImageUtils.getLogo(120, 120));
+        JLabel logoLabel = new JLabel(ImageUtils.getLogo(100, 100));
         logoLabel.setHorizontalAlignment(SwingConstants.CENTER);
         mainPanel.add(logoLabel, BorderLayout.NORTH);
 
         // Create registration panel
         JPanel registerPanel = new JPanel(new GridBagLayout());
-        registerPanel.setBackground(new Color(240, 240, 250));
+        registerPanel.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Create components with enhanced styling
+        // Create components
         JLabel lblUsername = new JLabel("Username:");
         JLabel lblPassword = new JLabel("Password:");
         JLabel lblConfirmPassword = new JLabel("Confirm Password:");
@@ -50,29 +48,14 @@ public class RegisterForm extends JFrame {
         JLabel lblEmail = new JLabel("Email:");
         JLabel lblPhone = new JLabel("Phone:");
 
-        // Set font for labels
-        Font labelFont = new Font("Segoe UI", Font.BOLD, 14);
-        lblUsername.setFont(labelFont);
-        lblPassword.setFont(labelFont);
-        lblConfirmPassword.setFont(labelFont);
-        lblFullname.setFont(labelFont);
-        lblEmail.setFont(labelFont);
-        lblPhone.setFont(labelFont);
-
-        // Create and style text fields
-        txtUsername = createStyledTextField();
-        txtPassword = createStyledPasswordField();
-        txtConfirmPassword = createStyledPasswordField();
-        txtFullname = createStyledTextField();
-        txtEmail = createStyledTextField();
-        txtPhone = createStyledTextField();
-
-        // Style buttons
+        txtUsername = new JTextField(20);
+        txtPassword = new JPasswordField(20);
+        txtConfirmPassword = new JPasswordField(20);
+        txtFullname = new JTextField(20);
+        txtEmail = new JTextField(20);
+        txtPhone = new JTextField(20);
         JButton btnRegister = new JButton("Register");
-        styleButton(btnRegister, new Color(60, 179, 113));
-        
         JButton btnBack = new JButton("Back to Login");
-        styleButton(btnBack, new Color(70, 130, 180));
 
         // Layout components
         gbc.gridx = 0; gbc.gridy = 0;
@@ -106,8 +89,8 @@ public class RegisterForm extends JFrame {
         registerPanel.add(txtPhone, gbc);
 
         // Button panel
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        buttonPanel.setBackground(new Color(240, 240, 250));
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.add(btnRegister);
         buttonPanel.add(btnBack);
 
@@ -125,32 +108,6 @@ public class RegisterForm extends JFrame {
             loginForm.setVisible(true);
             dispose();
         });
-    }
-
-    private JTextField createStyledTextField() {
-        JTextField field = new JTextField(20);
-        field.setPreferredSize(new Dimension(200, 30));
-        field.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(180, 180, 180)),
-            BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        return field;
-    }
-
-    private JPasswordField createStyledPasswordField() {
-        JPasswordField field = new JPasswordField(20);
-        field.setPreferredSize(new Dimension(200, 30));
-        field.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(180, 180, 180)),
-            BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        return field;
-    }
-
-    private void styleButton(JButton button, Color bgColor) {
-        button.setPreferredSize(new Dimension(120, 35));
-        button.setBackground(bgColor);
-        button.setForeground(Color.WHITE);
-        button.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        button.setFocusPainted(false);
     }
 
     private void register() {

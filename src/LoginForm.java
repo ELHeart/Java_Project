@@ -11,7 +11,7 @@ public class LoginForm extends JFrame {
 
     public LoginForm() {
         setTitle("Drama Club Membership - Login");
-        setSize(400, 350);
+        setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
@@ -19,53 +19,27 @@ public class LoginForm extends JFrame {
         ImageUtils.setFrameIcon(this);
 
         // Create main panel
-        JPanel mainPanel = new JPanel(new BorderLayout(0, 20));
-        mainPanel.setBackground(new Color(240, 240, 250));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(Color.WHITE);
         
         // Add logo at the top
-        JLabel logoLabel = new JLabel(ImageUtils.getLogo(120, 120));
+        JLabel logoLabel = new JLabel(ImageUtils.getLogo(100, 100));
         logoLabel.setHorizontalAlignment(SwingConstants.CENTER);
         mainPanel.add(logoLabel, BorderLayout.NORTH);
 
         // Create login panel
         JPanel loginPanel = new JPanel(new GridBagLayout());
-        loginPanel.setBackground(new Color(240, 240, 250));
+        loginPanel.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Add components with enhanced styling
+        // Add components
         JLabel lblUsername = new JLabel("Username:");
-        lblUsername.setFont(new Font("Segoe UI", Font.BOLD, 14));
         JLabel lblPassword = new JLabel("Password:");
-        lblPassword.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        
         txtUsername = new JTextField(20);
-        txtUsername.setPreferredSize(new Dimension(200, 30));
-        txtUsername.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(180, 180, 180)),
-            BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        
         txtPassword = new JPasswordField(20);
-        txtPassword.setPreferredSize(new Dimension(200, 30));
-        txtPassword.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(180, 180, 180)),
-            BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-
         JButton btnLogin = new JButton("Login");
-        btnLogin.setPreferredSize(new Dimension(100, 35));
-        btnLogin.setBackground(new Color(70, 130, 180));
-        btnLogin.setForeground(Color.WHITE);
-        btnLogin.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        btnLogin.setFocusPainted(false);
-        
         JButton btnRegister = new JButton("Register");
-        btnRegister.setPreferredSize(new Dimension(100, 35));
-        btnRegister.setBackground(new Color(60, 179, 113));
-        btnRegister.setForeground(Color.WHITE);
-        btnRegister.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        btnRegister.setFocusPainted(false);
 
         // Layout components
         gbc.gridx = 0; gbc.gridy = 0;
@@ -77,8 +51,8 @@ public class LoginForm extends JFrame {
         gbc.gridx = 1;
         loginPanel.add(txtPassword, gbc);
         
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        buttonPanel.setBackground(new Color(240, 240, 250));
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.add(btnLogin);
         buttonPanel.add(btnRegister);
         
