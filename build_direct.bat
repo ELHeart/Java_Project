@@ -1,27 +1,4 @@
 @echo off
-echo Checking Java installation...
-
-:: Check if Java is installed
-java -version >nul 2>&1
-if errorlevel 1 (
-    echo ERROR: Java is not installed or not in PATH
-    echo Please install Java JDK and add it to your PATH
-    echo You can download JDK from: https://www.oracle.com/java/technologies/downloads/
-    pause
-    exit /b 1
-)
-
-:: Check if javac is available
-javac -version >nul 2>&1
-if errorlevel 1 (
-    echo ERROR: Java Development Kit (JDK) is not installed or not in PATH
-    echo Please install JDK and add it to your PATH
-    echo You can download JDK from: https://www.oracle.com/java/technologies/downloads/
-    pause
-    exit /b 1
-)
-
-echo Java checks passed successfully
 echo Setting up directories...
 
 :: Create required directories
@@ -42,12 +19,17 @@ if exist "lib\mysql-connector-j-9.2.0\mysql-connector-j-9.2.0.jar" (
     exit /b 1
 )
 
+:: Set Java paths (MODIFY THESE PATHS TO MATCH YOUR JAVA INSTALLATION)
+set JAVA_HOME=C:\Program Files\Java\jdk-17
+set JAVAC="%JAVA_HOME%\bin\javac.exe"
+set JAR="%JAVA_HOME%\bin\jar.exe"
+
 :: Set the classpath
 set CLASSPATH=src;dist\lib\mysql-connector-j-9.2.0.jar
 
 echo Compiling Java files...
 :: Compile Java files
-javac -d bin -cp "%CLASSPATH%" src\*.java
+%JAVAC% -d bin -cp "%CLASSPATH%" src\*.java
 if errorlevel 1 (
     echo Compilation failed
     pause
@@ -57,7 +39,7 @@ if errorlevel 1 (
 :: Create JAR file
 echo Creating JAR file...
 cd bin
-jar cfm ..\ClubMembershipApp.jar ..\src\MANIFEST.MF *.class
+%JAR% cfm ..\ClubMembershipApp.jar ..\src\MANIFEST.MF *.class
 cd ..
 
 :: Copy other required files
@@ -70,7 +52,7 @@ if exist images\*.* copy images\*.* dist\images\
 :: Create run.bat in dist folder
 echo Creating run.bat...
 echo @echo off > dist\run.bat
-echo java -jar ClubMembershipApp.jar >> dist\run.bat
+echo "%JAVA_HOME%\bin\java.exe" -jar ClubMembershipApp.jar >> dist\run.bat
 echo pause >> dist\run.bat
 
 echo Done! The executable can be found in the dist folder.
