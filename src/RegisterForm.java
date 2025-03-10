@@ -130,7 +130,7 @@ public class RegisterForm extends JFrame {
             JOptionPane.showMessageDialog(this, "Please fill in all required fields", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+        // Validates Password input
         if (!password.equals(confirmPassword)) {
             JOptionPane.showMessageDialog(this, "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
             return;

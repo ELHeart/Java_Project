@@ -263,8 +263,10 @@ public class MainForm extends JFrame {
 
         JLabel membersLabel = new JLabel("Group Members:");
 
-        JLabel member1Label = new JLabel("Davidson Kwaipe Boye");
-        JLabel member1IdLabel = new JLabel("01212270D");
+        JLabel member1Label = new JLabel("Davidson Kwaipe Boye - 01212270D");
+        JLabel member2Label = new JLabel("Opoku Michael Nyarko Nyamekye - 01232641D");
+        JLabel member3Label = new JLabel("Rahma Nasrideen Ibrahim - 01232094D");
+        JLabel member4Label = new JLabel("Ellison Nana Agyapong Duodu - 01231665D");
 
         JLabel courseLabel = new JLabel("Course: Object Oriented Software Development with Java II");
         JLabel yearLabel = new JLabel("Academic Year: 2024/2025");
@@ -275,7 +277,9 @@ public class MainForm extends JFrame {
         panel.add(new JLabel(" "), gbc);
         panel.add(membersLabel, gbc);
         panel.add(member1Label, gbc);
-        panel.add(member1IdLabel, gbc);
+        panel.add(member2Label, gbc);
+        panel.add(member3Label, gbc);
+        panel.add(member4Label, gbc);
         panel.add(new JLabel(" "), gbc);
         panel.add(courseLabel, gbc);
         panel.add(yearLabel, gbc);
