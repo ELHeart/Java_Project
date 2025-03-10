@@ -45,14 +45,14 @@ cd ..
 :: Copy other required files
 echo Copying other required files...
 copy ClubMembershipApp.jar dist\
-if exist src\logback.xml copy src\logback.xml dist\
 if not exist dist\images mkdir dist\images
 if exist images\*.* copy images\*.* dist\images\
 
 :: Create run.bat in dist folder
 echo Creating run.bat...
 echo @echo off > dist\run.bat
-echo "%JAVA_HOME%\bin\java.exe" -jar ClubMembershipApp.jar >> dist\run.bat
+echo set CLASSPATH=lib\mysql-connector-j-9.2.0.jar >> dist\run.bat
+echo "%JAVA_HOME%\bin\java.exe" -cp "%%CLASSPATH%%;ClubMembershipApp.jar" ClubMembershipApp >> dist\run.bat
 echo pause >> dist\run.bat
 
 echo Done! The executable can be found in the dist folder.

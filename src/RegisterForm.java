@@ -1,19 +1,12 @@
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Registration form for the Drama Club Membership Application.
  * Handles new user registration with validation and duplicate checking.
  */
 public class RegisterForm extends JFrame {
-    private static final Logger logger = LoggerFactory.getLogger(RegisterForm.class);
     private final JTextField txtUsername;
     private final JPasswordField txtPassword;
     private final JPasswordField txtConfirmPassword;
@@ -189,7 +182,7 @@ public class RegisterForm extends JFrame {
         } catch (DuplicateNameException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Duplicate Name Error", JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
-            logger.error("Database error during registration", ex);
+            System.err.println("Database error during registration: " + ex.getMessage());
             JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }

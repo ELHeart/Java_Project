@@ -1,19 +1,12 @@
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Login form for the Drama Club Membership Application.
  * Handles user authentication and navigation to the main application.
  */
 public class LoginForm extends JFrame {
-    private static final Logger logger = LoggerFactory.getLogger(LoginForm.class);
     private final JTextField txtUsername;
     private final JPasswordField txtPassword;
 
@@ -115,12 +108,8 @@ public class LoginForm extends JFrame {
                 }
             }
         } catch (SQLException ex) {
-            logger.error("Database error during login", ex);
+            System.err.println("Database error during login: " + ex.getMessage());
             JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception ex) {
-            logger.error("Unexpected error during login", ex);
-            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }

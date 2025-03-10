@@ -1,6 +1,3 @@
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -11,7 +8,6 @@ import java.sql.*;
  * Displays and manages student records with search and delete functionality.
  */
 public class MainForm extends JFrame {
-    private static final Logger logger = LoggerFactory.getLogger(MainForm.class);
     private final JTable tblStudents;
     private final DefaultTableModel tableModel;
     private final JTextField txtSearch;
@@ -149,7 +145,7 @@ public class MainForm extends JFrame {
                 }
             }
         } catch (SQLException ex) {
-            logger.error("Database error during member list refresh", ex);
+            System.err.println("Database error during member list refresh");
             JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -190,7 +186,7 @@ public class MainForm extends JFrame {
                 }
             }
         } catch (SQLException ex) {
-            logger.error("Database error during member search", ex);
+            System.err.println("Database error during member search");
             JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -239,7 +235,7 @@ public class MainForm extends JFrame {
                     }
                 }
             } catch (SQLException ex) {
-                logger.error("Database error during member deletion", ex);
+                System.err.println("Database error during member deletion");
                 JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(),
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
