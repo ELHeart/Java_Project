@@ -4,8 +4,8 @@ import java.awt.*;
 import java.sql.*;
 
 /**
- * Main form of the Drama Club Membership Application.
- * Displays and manages student records with search and delete functionality.
+ * Main form of the Java Ambassadors Programming Club Membership Application.
+ * Provides the primary interface for managing club members and activities.
  */
 public class MainForm extends JFrame {
     private final JTable tblStudents;
@@ -20,7 +20,7 @@ public class MainForm extends JFrame {
     public MainForm(int userId) {
         this.currentUserId = userId;
 
-        setTitle("Drama Club Membership - Main");
+        setTitle("Java Ambassadors Programming Club - Main");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -30,7 +30,7 @@ public class MainForm extends JFrame {
 
         // Create menu bar
         JMenuBar menuBar = new JMenuBar();
-        
+
         // File menu
         JMenu fileMenu = new JMenu("File");
         JMenuItem refreshItem = new JMenuItem("Refresh");
@@ -38,7 +38,7 @@ public class MainForm extends JFrame {
         fileMenu.add(refreshItem);
         fileMenu.addSeparator();
         fileMenu.add(logoutItem);
-        
+
         // Help menu
         JMenu helpMenu = new JMenu("Help");
         JMenuItem aboutItem = new JMenuItem("About");
@@ -256,7 +256,7 @@ public class MainForm extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridwidth = GridBagConstraints.REMAINDER;
 
-        JLabel titleLabel = new JLabel("Drama Club Membership Application");
+        JLabel titleLabel = new JLabel("Java Ambassadors Programming Club Application");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
         JLabel copyrightLabel = new JLabel("Copyright © 2025");

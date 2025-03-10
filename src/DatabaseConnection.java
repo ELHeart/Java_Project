@@ -1,11 +1,12 @@
 import java.sql.*;
 
 /**
- * Database connection code for the Drama Club Membership Application.
+ * Database connection utility for the Java Ambassadors Programming Club Membership Application.
+ * Provides centralized database connection management.
  * This code take care of the XAMPP Connection.
  */
 public class DatabaseConnection {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/club_membership";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/java_ambassadors_club";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "";
 

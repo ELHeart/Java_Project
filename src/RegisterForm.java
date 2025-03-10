@@ -3,7 +3,7 @@ import java.awt.*;
 import java.sql.*;
 
 /**
- * Registration form for the Drama Club Membership Application.
+ * Registration form for the Java Ambassadors Programming Club Membership Application.
  * Handles new user registration with validation and duplicate checking.
  */
 public class RegisterForm extends JFrame {
@@ -19,7 +19,7 @@ public class RegisterForm extends JFrame {
      * Initializes the UI components and sets up event handlers.
      */
     public RegisterForm() {
-        setTitle("Drama Club Membership - Register");
+        setTitle("Java Ambassadors Programming Club - Register");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

@@ -1,8 +1,8 @@
 -- Create database if not exists
-CREATE DATABASE IF NOT EXISTS club_membership;
+CREATE DATABASE IF NOT EXISTS java_ambassadors_club;
 
 -- Use the database
-USE club_membership;
+USE java_ambassadors_club;
 
 -- Create students table
 CREATE TABLE IF NOT EXISTS students (

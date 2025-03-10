@@ -3,7 +3,7 @@ import java.awt.*;
 import java.sql.*;
 
 /**
- * This code is for the Login form for the Drama Club Membership Application.
+ * This code is for the Login form for the Java Ambassadors Programming Club Membership Application.
  * Handles user authentication and navigation to the main application.
  */
 public class LoginForm extends JFrame {
@@ -15,7 +15,7 @@ public class LoginForm extends JFrame {
      * Initializes the UI components and sets up event handlers.
      */
     public LoginForm() {
-        setTitle("Drama Club Membership - Login");
+        setTitle("Java Ambassadors Programming Club - Login");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
