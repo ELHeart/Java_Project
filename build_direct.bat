@@ -19,8 +19,8 @@ if exist "lib\mysql-connector-j-9.2.0\mysql-connector-j-9.2.0.jar" (
     exit /b 1
 )
 
-:: Set Java paths (MODIFY THESE PATHS TO MATCH YOUR JAVA INSTALLATION)
-set JAVA_HOME=C:\Program Files\Java\jdk-17
+:: Set Java paths with your specific JDK installation
+set JAVA_HOME=C:\Program Files\Java\jdk-23
 set JAVAC="%JAVA_HOME%\bin\javac.exe"
 set JAR="%JAVA_HOME%\bin\jar.exe"
 
