@@ -1,3 +1,3 @@
 @echo off
-java -jar ClubMembershipApp.jar
+java -cp "lib/*;ClubMembershipApp.jar" ClubMembershipApp
 pause 
