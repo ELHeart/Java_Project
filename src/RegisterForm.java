@@ -130,14 +130,14 @@ public class RegisterForm extends JFrame {
             JOptionPane.showMessageDialog(this, "Please fill in all required fields", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        // Validates Password input
+
         if (!password.equals(confirmPassword)) {
             JOptionPane.showMessageDialog(this, "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
+        // Checks if the Student's name entered already exists.
         try (Connection conn = DatabaseConnection.getConnection()) {
-            // Check if name already exists
             String checkSql = "SELECT COUNT(*) FROM students WHERE fullname = ?";
             try (PreparedStatement checkStmt = conn.prepareStatement(checkSql)) {
                 checkStmt.setString(1, fullname);
@@ -160,7 +160,7 @@ public class RegisterForm extends JFrame {
                 }
             }
 
-            // Insert new student
+            // Inserts new student data into the table
             String sql = "INSERT INTO students (username, password, fullname, email, phone) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, username);

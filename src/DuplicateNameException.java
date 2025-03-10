@@ -1,6 +1,6 @@
 /**
- * Custom exception for handling duplicate student names in the application.
- * Thrown when attempting to register a student with a name that already exists.
+ * This exception is for handling duplicate student names in the application.
+ * The exception is thrown when attempting to register a student with a name that already exists.
  */
 public class DuplicateNameException extends Exception {
     /**

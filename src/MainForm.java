@@ -295,8 +295,8 @@ public class MainForm extends JFrame {
         aboutWindow.setLocationRelativeTo(this);
         aboutWindow.setVisible(true);
 
-        // Auto-close after 10 seconds
-        Timer timer = new Timer(10000, _ -> aboutWindow.dispose());
+        // Auto-close after 30 seconds
+        Timer timer = new Timer(30000, _ -> aboutWindow.dispose());
         timer.setRepeats(false);
         timer.start();
     }

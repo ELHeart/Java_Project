@@ -3,7 +3,7 @@ import java.awt.*;
 import java.sql.*;
 
 /**
- * Login form for the Drama Club Membership Application.
+ * This code is for the Login form for the Drama Club Membership Application.
  * Handles user authentication and navigation to the main application.
  */
 public class LoginForm extends JFrame {
@@ -78,8 +78,8 @@ public class LoginForm extends JFrame {
     }
 
     /**
-     * Handles the login process by validating credentials against the database.
-     * If successful, opens the main form; otherwise, shows an error message.
+     * Handles the login process by validating credentials against the MySQL database in XAMPP.
+     * If successful, it opens the main form; otherwise, shows an error message.
      */
     private void login() {
         String username = txtUsername.getText();
