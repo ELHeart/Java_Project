@@ -19,13 +19,43 @@ if exist "lib\mysql-connector-j-9.2.0\mysql-connector-j-9.2.0.jar" (
     exit /b 1
 )
 
+:: SLF4J API
+if exist "lib\slf4j-api-2.0.9\slf4j-api-2.0.9.jar" (
+    copy "lib\slf4j-api-2.0.9\slf4j-api-2.0.9.jar" "dist\lib\" > nul
+    echo SLF4J API copied successfully
+) else (
+    echo ERROR: SLF4J API JAR not found
+    pause
+    exit /b 1
+)
+
+:: Logback Core
+if exist "lib\logback-core-1.5.17\logback-core-1.5.17.jar" (
+    copy "lib\logback-core-1.5.17\logback-core-1.5.17.jar" "dist\lib\" > nul
+    echo Logback Core copied successfully
+) else (
+    echo ERROR: Logback Core JAR not found
+    pause
+    exit /b 1
+)
+
+:: Logback Classic
+if exist "lib\logback-classic-1.5.17\logback-classic-1.5.17.jar" (
+    copy "lib\logback-classic-1.5.17\logback-classic-1.5.17.jar" "dist\lib\" > nul
+    echo Logback Classic copied successfully
+) else (
+    echo ERROR: Logback Classic JAR not found
+    pause
+    exit /b 1
+)
+
 :: Set Java paths with your specific JDK installation
 set JAVA_HOME=C:\Program Files\Java\jdk-23
 set JAVAC="%JAVA_HOME%\bin\javac.exe"
 set JAR="%JAVA_HOME%\bin\jar.exe"
 
-:: Set the classpath
-set CLASSPATH=src;dist\lib\mysql-connector-j-9.2.0.jar
+:: Set the classpath with all required libraries
+set CLASSPATH=src;dist\lib\mysql-connector-j-9.2.0.jar;dist\lib\slf4j-api-2.0.9.jar;dist\lib\logback-core-1.5.17.jar;dist\lib\logback-classic-1.5.17.jar
 
 echo Compiling Java files...
 :: Compile Java files
@@ -52,7 +82,8 @@ if exist images\*.* copy images\*.* dist\images\
 :: Create run.bat in dist folder
 echo Creating run.bat...
 echo @echo off > dist\run.bat
-echo "%JAVA_HOME%\bin\java.exe" -jar ClubMembershipApp.jar >> dist\run.bat
+echo set CLASSPATH=lib\mysql-connector-j-9.2.0.jar;lib\slf4j-api-2.0.9.jar;lib\logback-core-1.5.17.jar;lib\logback-classic-1.5.17.jar >> dist\run.bat
+echo "%JAVA_HOME%\bin\java.exe" -cp "%%CLASSPATH%%;ClubMembershipApp.jar" ClubMembershipApp >> dist\run.bat
 echo pause >> dist\run.bat
 
 echo Done! The executable can be found in the dist folder.
